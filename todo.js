@@ -16,6 +16,7 @@ $(document).ready( function() {
   var Todos = Backbone.Collection.extend({
     model: Todo,
 
+
   });
 
 
@@ -41,10 +42,8 @@ $(document).ready( function() {
       } else {
         this.model.set('done', false);
       }
-    
 
     },
-
 
     render: function() {
       this.$el.html(this.template(this.model.attributes));
@@ -53,6 +52,25 @@ $(document).ready( function() {
 
   });
 
+  var InputView = Backbone.View.extend({
+    el: '<form><input type="text" class="input-value"></input><input type="submit" class="submit"></input></form>',
+
+    events: {
+      'submit': 'captureValue'
+    },
+
+    captureValue: function() {
+      var inputVal = $('.input-value').val();
+      this.collection.add([  //soooo this is adding correctly to the collection, but when the appview renders it, you need to specify the event listener to be on "add" or "all"
+        {'title': inputVal}
+      ]);
+
+    },
+
+    render: function() {
+       return this.$el;
+    }
+  });
 
 
   // APP VIEW
@@ -60,10 +78,15 @@ $(document).ready( function() {
 
     el: $('body'),
 
+    initialize: function() {
+      this.collection.on('all', this.render, this) 
+    },
+
     render: function() {
       this.$el.empty();
-      // calls rendertodo on each todo item
-      this.collection.forEach(this.rendertodo, this);
+      var inputField = new InputView({collection: todos}); 
+      this.$el.append(inputField.render()); // this wasn't working because we needed to create a render function on inputview
+      this.collection.forEach(this.rendertodo, this); // calls rendertodo on each todo item
     },
 
     rendertodo: function(todo) {
@@ -73,6 +96,8 @@ $(document).ready( function() {
     }
     
   });
+
+  //MAKE SURE YOU INSTANTIATE SHIT
 
   var todoList = [{title:'eat dinner'}, {title:'sleep'}, {title:'drink water'}];
   var todos = new Todos(todoList); //creates empty collection of todo list. dont pass anything in because you have no data right now to create a collection
