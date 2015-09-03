@@ -19,7 +19,6 @@ $(document).ready( function() {
   });
 
 
-
   // MODEL VIEW
 
   // toggle done state
@@ -27,14 +26,32 @@ $(document).ready( function() {
   var TodoView = Backbone.View.extend({
     template: _.template('<div class="todo-item"><div class="todo-title"><%- title %></div><div class="todo-done"><%- done %></div>'),
 
+    initialize: function() {
+      this.model.on('change', this.render, this); //anytime there is a change on the model, rerender. you can also set it to all and it will detect anything
+    },
+
+    events: {
+      'click .todo-done': 'toggle'
+    },
+
+    toggle: function() { //this has to rerender, which you have in your initialize. ALSO make sure to use get and set to access your attributes in the model. view knows of the model bc of when it was instantiated. 
+
+      if(this.model.get('done') === false) {
+        this.model.set('done', true);
+      } else {
+        this.model.set('done', false);
+      }
+    
+
+    },
+
+
     render: function() {
       this.$el.html(this.template(this.model.attributes));
       return this.$el;
     }
 
-
   });
-
 
 
 
