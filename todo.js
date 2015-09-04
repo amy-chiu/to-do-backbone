@@ -25,7 +25,7 @@ $(document).ready( function() {
   // toggle done state
 
   var TodoView = Backbone.View.extend({
-    template: _.template('<div class="todo-item"><div class="todo-title"><%- title %></div><div class="todo-done"><%- done %></div>'),
+    template: _.template('<div class="todo-item"><div class="todo-done"><%- done %></div><div class="todo-title"><%- title %></div></div>'),
 
     initialize: function() {
       this.model.on('change', this.render, this); //anytime there is a change on the model, rerender. you can also set it to all and it will detect anything
@@ -54,7 +54,7 @@ $(document).ready( function() {
   });
 
   var InputView = Backbone.View.extend({
-    el: '<div><input type="text" class="input-value"></input><input type="submit" class="submit"></input></div>',
+    el: '<div class ="form"><input type="text" class="input-value"></input><button type="submit" class="submit">add item</button></div>',
 
     events: {
       'click .submit': 'captureValue'

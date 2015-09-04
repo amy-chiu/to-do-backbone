@@ -1,0 +1,63 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: 18px;
+}
+
+.form {
+  margin: 100px 0 40px 40%;
+}
+
+input {
+
+}
+.input-value {
+  border: 1px solid gray;
+}
+
+.input-value, .submit {
+  border-radius: 10px;
+  font-size: 18px;
+  padding: 10px;
+}
+
+.submit {
+  background-color: #8C214F;
+  border-width: 0;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+/*.submit:hover {
+  background-color: ;
+}*/
+
+.todo-item {
+  background-color: #D74B68;
+  border-radius: 10px;
+  border-width: 0;
+  color: #fff;
+  display: inline-block;
+  margin-bottom: 20px;
+  margin-left: 40%;
+  padding: 15px;
+}
+
+.todo-title {
+  display: inline;
+}
+
+.todo-done {
+  display: inline;
+  font-weight: bold;
+  margin-right: 20px;
+}
+
+.todo-done:hover {
+  color: white;
+  cursor: pointer;
+}
