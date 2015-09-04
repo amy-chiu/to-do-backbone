@@ -53,14 +53,14 @@ $(document).ready( function() {
   });
 
   var InputView = Backbone.View.extend({
-    el: '<form><input type="text" class="input-value"></input><input type="submit" class="submit"></input></form>',
+    el: '<div><input type="text" class="input-value"></input><input type="submit" class="submit"></input></div>',
 
     events: {
-      'submit': 'captureValue'
+      'click .submit': 'captureValue'
     },
 
     captureValue: function() {
-      var inputVal = $('.input-value').val();
+      var inputVal = this.$el.find('.input-value').val(); // can also use $('.input-value') - doing it with $el limits the search on the DOM
       this.collection.add([  //soooo this is adding correctly to the collection, but when the appview renders it, you need to specify the event listener to be on "add" or "all"
         {'title': inputVal}
       ]);
