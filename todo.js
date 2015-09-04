@@ -5,7 +5,7 @@ $(document).ready( function() {
     defaults: {
       title: '',
       // order: function that finds the next one Todos.nextOrder();
-      done: false
+      done: 'done'
     }
 
   });
@@ -37,11 +37,12 @@ $(document).ready( function() {
 
     toggle: function() { //this has to rerender, which you have in your initialize. ALSO make sure to use get and set to access your attributes in the model. view knows of the model bc of when it was instantiated. 
 
-      if(this.model.get('done') === false) {
-        this.model.set('done', true);
-      } else {
-        this.model.set('done', false);
-      }
+      //if(this.model.get('done') === 'done') {
+        this.model.destroy(); // removes from the list when you click false
+      //}
+      // } else {
+      //   this.model.set('done', false);
+      // }
 
     },
 
